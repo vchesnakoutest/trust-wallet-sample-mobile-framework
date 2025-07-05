@@ -49,4 +49,9 @@ public class CreateWalletTests extends BaseTest {
         createPasscodePage.enterFullPasscode(2);
         createPasscodeVerificationService.verifyPasscodeMismatchError();
     }
+
+    @Test(description = "This is a test to verify that a screenshot is taken on test failure")
+    public void verifyScreenshotOnTestFailure() {
+        walletHomePage.clickInvalidElement();
+    }
 }

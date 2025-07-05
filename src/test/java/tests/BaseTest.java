@@ -1,15 +1,23 @@
 package tests;
 
 import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.qameta.allure.Allure;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import pages.*;
 import services.CreatePasscodeVerificationService;
 import services.HomePageVerificationService;
 import utils.AppiumServerUtils;
 import utils.DriverUtils;
+import utils.TestListenerUtils;
 
+import java.io.ByteArrayInputStream;
+
+import static utils.AllureReportUtils.takeScreenshot;
+
+@Listeners(TestListenerUtils.class)
 public class BaseTest {
     private AppiumDriverLocalService appiumService;
     protected WelcomePage welcomePage;
@@ -30,6 +38,9 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            Allure.addAttachment("Screenshot on test failure", new ByteArrayInputStream(takeScreenshot()));
+        }
         DriverUtils.quitDriver();
         appiumService.stop();
     }

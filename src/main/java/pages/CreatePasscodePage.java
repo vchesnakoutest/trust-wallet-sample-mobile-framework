@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -26,6 +27,7 @@ public class CreatePasscodePage extends BasePage {
 		digitButton.click();
 	}
 
+	@Step("Entering passcode digit: {digit}")
 	public void enterFullPasscode(int digit) {
 		enterPasscode(digit, MAX_PASSCODE_DIGITS);
 	}

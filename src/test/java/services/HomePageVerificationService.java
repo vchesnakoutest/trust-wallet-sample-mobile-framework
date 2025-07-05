@@ -1,5 +1,6 @@
 package services;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import pages.WalletHomePage;
@@ -16,17 +17,20 @@ public class HomePageVerificationService extends WalletHomePage {
 		Assert.assertEquals(getTopBarWalletName(), expectedWalletName, "Wallet home page is not displayed.");
 	}
 
+	@Step("Verifying wallet creation was successful")
 	public void verifyWalletCreatedSuccessfully() {
 		log.info("Verifying wallet creation was successful.");
 		verifyWalletNameIsDisplayed("Main Wallet 1");
 		verifyWalletBalance("$0.00");
 	}
 
+	@Step("Verifying wallet balance is displayed: {expectedWalletBalance}")
 	public void verifyWalletBalance(String expectedWalletBalance) {
 		log.info("Verifying wallet balance is displayed: {}", expectedWalletBalance);
 		Assert.assertEquals(getMainBalance(), expectedWalletBalance, "Main balance does not match expected value.");
 	}
 
+	@Step("Verifying wallet home page layout")
 	public void verifyWalletHomepageLayout() {
 		waitForWalletHomePageDisplayed();
 		log.info("Verifying wallet home page layout:");
@@ -60,13 +64,5 @@ public class HomePageVerificationService extends WalletHomePage {
 		Assert.assertTrue(isTopBarQrIconDisplayed(), "Top bar QR icon is not displayed.");
 		log.info("Checking if top bar search icon is displayed.");
 		Assert.assertTrue(isTopBarSearchIconDisplayed(), "Top bar search icon is not displayed.");
-	}
-
-	public void verifyWalletHomePage() {
-		log.info("Verifying wallet home page.");
-		verifyWalletNameIsDisplayed("Main Wallet 1");
-		verifyWalletBalance("$0.00");
-		verifyWalletHomepageLayout();
-		log.info("Wallet home page verification completed successfully.");
 	}
 }

@@ -17,7 +17,7 @@ public class DriverUtils {
      */
     public static void initializeDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("app", System.getProperty("user.dir") + "/src/apps/android/latest.apk");
+        capabilities.setCapability("app", System.getProperty("user.dir") + "/src/apps/android/latest.apk");
         capabilities.setCapability("appium:platformName", "Android");
         capabilities.setCapability("appium:automationName", "UiAutomator2");
         capabilities.setCapability("appium:appPackage", "com.wallet.crypto.trustapp");

@@ -59,6 +59,9 @@ public class WalletHomePage extends BasePage {
 	@FindBy(xpath = "//android.widget.TextView[@text='Manage crypto']")
 	private WebElement manageCryptoButton;
 
+	@FindBy(id = "invalidElement")
+	private WebElement invalidElement;
+
 	public String getTopBarWalletName() {
 		return topBarWalletName.getText();
 	}
@@ -130,5 +133,9 @@ public class WalletHomePage extends BasePage {
 
 	public boolean isTopBarSearchIconDisplayed() {
 		return topBarSearchIcon.isDisplayed();
+	}
+
+	public void clickInvalidElement() {
+			invalidElement.click();
 	}
 }
