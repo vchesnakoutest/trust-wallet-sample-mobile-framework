@@ -17,7 +17,7 @@ public class DriverUtils {
      */
     public static void initializeDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("app", System.getProperty("user.dir") + "/src/apps/android/latest.apk");
+//        capabilities.setCapability("app", System.getProperty("user.dir") + "/src/apps/android/latest.apk");
         capabilities.setCapability("appium:platformName", "Android");
         capabilities.setCapability("appium:automationName", "UiAutomator2");
         capabilities.setCapability("appium:appPackage", "com.wallet.crypto.trustapp");
@@ -25,7 +25,7 @@ public class DriverUtils {
         capabilities.setCapability("appium:disableIdLocatorAutocompletion", true);
 
         try {
-            driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), capabilities);
+            driver = new AndroidDriver(new URL("http://127.0.0.1:4725"), capabilities);
         } catch (MalformedURLException e) {
             throw new RuntimeException("Appium server URL is invalid", e);
         }

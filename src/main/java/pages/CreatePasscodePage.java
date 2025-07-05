@@ -3,6 +3,7 @@ package pages;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 @Log4j2
 public class CreatePasscodePage extends BasePage {
@@ -12,10 +13,9 @@ public class CreatePasscodePage extends BasePage {
 	private static final int MAX_PASSCODE_DIGITS = 6;
 	private static final String KEYBOARD_DIGIT_BUTTON = "//android.widget.TextView[@text='%s']";
 
-	/**
-	 * Clicks a digit button on the passcode keyboard.
-	 * @param digit The digit to click (0-9).
-	 */
+	@FindBy(xpath = "//android.widget.TextView[@text='Those passwords didn’t match!']")
+	private WebElement passcodeMismatchError;
+
 	public void clickDigitButton(int digit) {
 		if (digit < MIN_KEYBOARD_DIGIT || digit > MAX_KEYBOARD_DIGIT) {
 			throw new IllegalArgumentException("Digit must be between 0 and 9.");
@@ -26,22 +26,17 @@ public class CreatePasscodePage extends BasePage {
 		digitButton.click();
 	}
 
-	/**
-	 * Enters a passcode by clicking the digit buttons the specified number of times.
-	 * @param digit The digit to enter (0-9).
-	 */
 	public void enterFullPasscode(int digit) {
 		enterPasscode(digit, MAX_PASSCODE_DIGITS);
 	}
 
-	/**
-	 * Enters a passcode by clicking the digit buttons the specified number of times.
-	 * @param digit The digit to enter (0-9).
-	 * @param times The number of times to click the digit button.
-	 */
 	public void enterPasscode(int digit, int times) {
 		for (int i = 0; i < times; i++) {
 			clickDigitButton(digit);
 		}
+	}
+
+	public boolean isPasscodeMismatchErrorDisplayed() {
+		return passcodeMismatchError.isDisplayed();
 	}
 }
